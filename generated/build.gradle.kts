@@ -14,7 +14,8 @@ dependencies {
 }
 jooq {
     configuration {
-        // url, username, password should be configured in environment variables
+        // TODO: make this configurable (ex. env variable)
+        // url, username, password should be configured
         jdbc {
             driver = "com.mysql.cj.jdbc.Driver"
             url = "jdbc:mysql://127.0.1:3306/csereal?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul"
