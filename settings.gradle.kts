@@ -6,3 +6,4 @@ include(":generated")
 include(":scripts")
 
 // You should include your script subprojects here
+include(":scripts:remove-html-wrapped")
