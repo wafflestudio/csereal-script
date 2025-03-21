@@ -1,6 +1,11 @@
+allprojects {
+    dependencies {
+        implementation(project(":generated"))
+    }
+}
+
 subprojects {
     dependencies {
-        implementation(project(":shared"))
-        implementation(project(":generated"))
+        implementation(project(":scripts"))
     }
 }
