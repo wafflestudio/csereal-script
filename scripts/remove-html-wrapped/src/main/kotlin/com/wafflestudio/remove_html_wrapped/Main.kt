@@ -22,7 +22,6 @@ fun main() {
         val dslContext = DSL.using(it, SQLDialect.MYSQL)
 
         // News
-        logger.info { "news" }
         extractBodyQueryExecution(
             dslContext,
             NEWS,
@@ -31,7 +30,6 @@ fun main() {
         )
 
         // Seminar - description
-        logger.info { "seminar - description" }
         extractBodyQueryExecution(
             dslContext,
             SEMINAR,
@@ -40,7 +38,6 @@ fun main() {
         )
 
         // Seminar - introduction
-        logger.info { "seminar - introduction" }
         extractBodyQueryExecution(
             dslContext,
             SEMINAR,
@@ -49,7 +46,6 @@ fun main() {
         )
 
         // Seminar - additional note
-        logger.info { "seminar - additional note" }
         extractBodyQueryExecution(
             dslContext,
             SEMINAR,
@@ -58,7 +54,6 @@ fun main() {
         )
 
         // Notice
-        logger.info { "notice" }
         extractBodyQueryExecution(
             dslContext,
             NOTICE,
@@ -74,6 +69,8 @@ fun <R: Record, T: TableImpl<R>> extractBodyQueryExecution(
     idField: TableField<R, Long?>,
     descriptionField: TableField<R, String?>,
 ) {
+    logger.info { "Processing ${table.name} - ${descriptionField.name}..." }
+
     val cursor = dslContext.selectFrom(table)
         .whereHtmlClause(descriptionField)
         .orderBy(idField.desc())
@@ -90,9 +87,9 @@ fun <R: Record, T: TableImpl<R>> extractBodyQueryExecution(
                     .where(idField.eq(id))
                     .execute()
             }
-            logger.debug { "Updated notice id: ${id}" }
+            logger.info { "Updated ${table.name} id: ${id}" }
         } catch (e: DataAccessException) {
-            logger.error { "Failed to update notice id: ${id}, error: ${e.message}" }
+            logger.error { "Failed to update ${table.name} id: ${id}, error: ${e.message}" }
         }
     }
 }
